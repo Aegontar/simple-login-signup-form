@@ -53,14 +53,20 @@ else if ($_GET['error'] == "usertaken") {
 
 
 
+
+
+
 }
 
+if (isset($_GET['signup'])) {
 
-else if ($_GET['signup'] == "success") {
+
+  if ($_GET['signup'] == "success") 
 
   echo '<p>signup successful!</p>';
 
 }
+
 
 
   ?>

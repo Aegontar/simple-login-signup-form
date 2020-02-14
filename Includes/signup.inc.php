@@ -5,6 +5,9 @@ if(isset($_POST['signup-submit'])) {
 
 require 'dbh.inc.php';
 
+//after you check your database connection
+$sql = mysqli_query($conn,"SELECT * FROM user WHERE username = '".$username."'");
+
 
 $username = $_POST['uid'];
 $email = $_POST['mail'];
@@ -41,7 +44,10 @@ else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     header("Location: ../signup.php?error=passwordcheck&uid".$username."&email=".$email);
     exit();
 
- }
+ } else if (mysqli_num_rows($sql)>0){
+   header("Location: ../signup.php?error=usernametaken");
+    exit();
+}
 
  else {
 
@@ -87,11 +93,6 @@ if ($resultCheck > 0) {
     mysqli_close();
    }
    
-   else {
-   
-      header('Location: ../signup.php');
-            exit();
-
-   }
+  
 
   
